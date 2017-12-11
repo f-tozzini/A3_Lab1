@@ -11,7 +11,17 @@
 
       fetch(url) //do an ajax call with fetch
         .then((resp)=> resp.json()) //convert to json
-        .then((data)=> { processResult(data); }) // call the process function
+        .then(({modelName,pricing, modelDetails, model})=> {
+          let carModel = document.querySelector('.modelName').textContent = modelName;
+          let prices = document.querySelector('.priceInfo').textContent = pricing;
+          let details = document.querySelector('.modelDetails').textContent = modelDetails;
+
+          images.forEach (function(car,index) {
+            car.classList.add('nonActive')
+          });
+          //this is a template string constructor - look it up
+          document.querySelector(`#${model}`).classList.remove('nonActive');
+        }) // call the process function
         .catch(function(error) {
           //catch any error and report back to console
         console.log(error);
